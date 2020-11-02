@@ -1,0 +1,29 @@
+{
+  "name": "modulartodolist",
+  "version": "1.0.0",
+  "description": "Create another to-do list this time using webpack and splitting into modules.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress -p",
+    "watch": "webpack --progress --watch",
+    "server": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coleus99/modularToDoList.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Coleus99/modularToDoList/issues"
+  },
+  "homepage": "https://github.com/Coleus99/modularToDoList#readme",
+  "devDependencies": {
+    "webpack": "^5.3.2",
+    "webpack-cli": "^4.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.3"
+  }
+}
