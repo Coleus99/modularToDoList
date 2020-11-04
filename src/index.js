@@ -1,8 +1,12 @@
-import{task, project} from './app';
+import{addNewProject} from './app';
 import{pageLoad} from './template';
+import {showProjects} from './display';
+import{updateEventListeners} from './input'
 
-const firstList = new project('My First List');
-firstList.addTask('first things first', 'lets test this is working', 'high', 'now');
-
-const secondList = new project('My Second List');
-// secondList.addTask('I second that', 'lets test this more', 'medium', 'later');
+if(sessionStorage.getItem('myToDoLists')===null){
+    addNewProject('My First List');
+}
+else{
+    showProjects();
+    updateEventListeners();
+}

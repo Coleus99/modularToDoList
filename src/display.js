@@ -1,17 +1,25 @@
-import{project} from './app'
+import{projectList} from './app'
 
-let showProject = function(name){
-    let project = document.createElement('div');
-    project.classList.add('project','card', 'my-2');
-    project.innerHTML = `
-        <div class="card-header">${name}</div>
-        <ul class="list-group list-group-flush" id="${name}">
-            <p>No tasks yet! Add one below</p>
-        </ul>
-        <button class="addTask">Add Task</button>
-    `;
-    let container = document.querySelector('.container');
-    container.appendChild(project);
+let showProjects = function(){
+    let projectsWrapper = document.querySelector('.projectsWrapper');
+    projectsWrapper.innerHTML='';
+    projectList.forEach(project => {
+        let projectCard = document.createElement('div');
+        projectCard.classList.add('project','card', 'my-2');
+        projectCard.innerHTML = `
+            <div class="card-header d-flex justify-content-between">
+                <span>${project.name}</span>
+                <button type="button" class="close closeProject" data-target="${project.name}" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <ul class="list-group list-group-flush" id="${project.name}">
+                <p>No tasks yet! Add one below</p>
+            </ul>
+            <button class="addTask">Add Task</button>
+        `;
+        projectsWrapper.appendChild(projectCard);
+    })
 }
 
 let showTasks = function(project){
@@ -33,4 +41,4 @@ let showTasks = function(project){
     })
 }
 
-export{showProject, showTasks}
+export{showProjects, showTasks}
