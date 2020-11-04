@@ -11,7 +11,8 @@ let pageLoad = function(){
     title.textContent = 'Modular To Do List'
 
     let newProjectForm = document.createElement('form');
-    newProjectForm.classList.add('newProjectForm', 'form-inline');
+    newProjectForm.classList.add('form-inline');
+    newProjectForm.setAttribute('id','newProjectForm')
     newProjectForm.innerHTML = `
         <div class="form-group mb-2 mr-2">
             <input type="text" class="form-control" placeholder="Enter new list name">

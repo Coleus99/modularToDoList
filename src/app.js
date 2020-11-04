@@ -1,5 +1,4 @@
 import {showProjects, showTasks} from './display'
-import {updateEventListeners} from './input'
 
 // Task constructor function
 function task(title, description, priority, dueDate){
@@ -19,17 +18,18 @@ function task(title, description, priority, dueDate){
     }
 }
 
-const projectList = JSON.parse(sessionStorage.getItem('myToDoLists')) || [];
+let projectList = JSON.parse(sessionStorage.getItem('myToDoLists')) || [];
 
 function addNewProject(name){
     projectList.push(new project(name));
     sessionStorage.setItem('myToDoLists', JSON.stringify(projectList));
     showProjects();
-    updateEventListeners();
 }
 
 function removeProject(name){
-    projectList.splice(projectList.indexOf(name),1);
+    projectList = projectList.filter(obj => {
+        return obj.name!==name;
+    });
     sessionStorage.setItem('myToDoLists', JSON.stringify(projectList));
     showProjects();
 }

@@ -9,8 +9,8 @@ let showProjects = function(){
         projectCard.innerHTML = `
             <div class="card-header d-flex justify-content-between">
                 <span>${project.name}</span>
-                <button type="button" class="close closeProject" data-target="${project.name}" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="close" aria-label="Close">
+                    <span class="closeProject" data-target="${project.name}" aria-hidden="true">&times;</span>
                 </button>
             </div>
             <ul class="list-group list-group-flush" id="${project.name}">
