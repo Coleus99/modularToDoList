@@ -1,4 +1,5 @@
 import{addNewTask, amendTask, toggleFormElements, deleteTask, projectList, addNewProject, removeProject} from './app';
+import { showTasks } from './display';
 
 let setEventListeners = function(){
     document.addEventListener('submit', function(event){
@@ -28,19 +29,38 @@ let setEventListeners = function(){
         if(event.target.classList.contains('editTask')){
             event.preventDefault();
             let taskForm = event.target.closest('form');
-            if(event.target.hasAttribute('active')){
-                let projectIndex = event.target.getAttribute('data-projectIndex');
-                let taskIndex = event.target.getAttribute('data-taskIndex');
+            if(event.target.parentNode.hasAttribute('active')){
+                let projectIndex = event.target.parentNode.getAttribute('data-projectIndex');
+                let taskIndex = event.target.parentNode.getAttribute('data-taskIndex');
                 amendTask(projectIndex, taskIndex, taskForm.elements.title.value, taskForm.elements.description.value, taskForm.elements.priority.value, taskForm.elements.dueDate.value)
                 event.target.textContent='Edit Task';
+                event.target.parentNode.querySelector('.deleteTask').textContent='Delete Task';
             }
             else{
                 event.target.textContent='Save changes';
+                event.target.parentNode.querySelector('.deleteTask').textContent='Cancel';
             }
             toggleFormElements(taskForm)
-            event.target.toggleAttribute('active')
+            event.target.parentNode.toggleAttribute('active')
         }
     });
+
+    document.addEventListener('click', function(event){
+        if(event.target.classList.contains('deleteTask')){
+            event.preventDefault();
+            let taskForm = event.target.closest('form');
+            let projectIndex = event.target.parentNode.getAttribute('data-projectIndex');
+            let taskIndex = event.target.parentNode.getAttribute('data-taskIndex');
+            if(event.target.parentNode.hasAttribute('active')){
+                showTasks(projectList[projectIndex]);
+            }
+            else{
+                deleteTask(projectIndex, taskIndex);
+            }
+            toggleFormElements(taskForm)
+            event.target.parentNode.toggleAttribute('active')
+        }
+    })
 
 }();
 

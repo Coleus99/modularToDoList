@@ -59,9 +59,11 @@ let showTasks = function(project){
         listItem.setAttribute('priority',task.priority);
         listItem.setAttribute('completed',task.completed);
         listItem.innerHTML=`
-            <input class="form-check-input m-0 position-static" type="checkbox" value="" id="defaultCheck1">
             <form>
                 <div class="form-row">
+                    <div class="form-group mb-2 col-md-1">
+                        <input class="form-check-input m-0 position-static" type="checkbox" value="" id="defaultCheck1">
+                    </div>
                     <div class="form-group mb-2 col-md-6">
                         <input name="title" type="text" disabled class="form-control-plaintext taskName" value="${task.title}">
                     </div>
@@ -72,7 +74,7 @@ let showTasks = function(project){
                             <option ${task.priority==='Low Priority'?'selected':''}>Low Priority</option>
                         </select>
                     </div>
-                    <div class="form-group mb-2 col-md-3">
+                    <div class="form-group mb-2 col-md-2">
                         <input name="dueDate" type="number" disabled class="form-control-plaintext dueDate" value="${task.dueDate}">
                     </div>
                 </div>
@@ -80,8 +82,9 @@ let showTasks = function(project){
                     <div class="form-group mb-2 col-md-9">
                         <textarea  name="description" disabled class="form-control-plaintext description" id="exampleFormControlTextarea1" rows="1">${task.description}</textarea>
                     </div>
-                    <div class="form-group mb-2 col-md-3">
-                        <button class="btn btn-primary mb-2 editTask" data-projectIndex="${projectList.indexOf(project)}" data-taskIndex="${project.taskList.indexOf(task)}">Edit Task</button>
+                    <div class="form-group button-group mb-2 col-md-3" data-projectIndex="${projectList.indexOf(project)}" data-taskIndex="${project.taskList.indexOf(task)}">
+                        <button class="btn btn-primary mb-2 editTask">Edit Task</button>
+                        <button class="btn btn-danger mb-2 deleteTask">Delete Task</button>
                     </div>
                 </div>
             </form>

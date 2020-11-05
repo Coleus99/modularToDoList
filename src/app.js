@@ -61,10 +61,11 @@ function amendTask(projectIndex, taskIndex, newTitle, newDescription, newPriorit
     showTasks(projectList[projectIndex]);
 }
 
-// function deleteTask(projectIndex,taskIndex){
-//     projectList[projectIndex].taskList.splice(taskIndex, 1);
-//     showTasks(projectList[projectIndex]);
-// }
+function deleteTask(projectIndex,taskIndex){
+    projectList[projectIndex].taskList.splice(taskIndex, 1);
+    localStorage.setItem('myToDoLists', JSON.stringify(projectList));
+    showTasks(projectList[projectIndex]);
+}
 
 // Project constructor function
 function project(name){
@@ -79,6 +80,7 @@ export {
     addNewTask,
     toggleFormElements,
     amendTask,
+    deleteTask,
     project,
     projectList
 }
