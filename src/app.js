@@ -18,11 +18,11 @@ function task(title, description, priority, dueDate){
     }
 }
 
-let projectList = JSON.parse(sessionStorage.getItem('myToDoLists')) || [];
+let projectList = JSON.parse(localStorage.getItem('myToDoLists')) || [];
 
 function addNewProject(name){
     projectList.push(new project(name));
-    sessionStorage.setItem('myToDoLists', JSON.stringify(projectList));
+    localStorage.setItem('myToDoLists', JSON.stringify(projectList));
     showProjects();
 }
 
@@ -30,29 +30,32 @@ function removeProject(name){
     projectList = projectList.filter(obj => {
         return obj.name!==name;
     });
-    sessionStorage.setItem('myToDoLists', JSON.stringify(projectList));
+    localStorage.setItem('myToDoLists', JSON.stringify(projectList));
     showProjects();
 }
+
+function addNewTask(projectIndex, title, description, priority, dueDate){
+    projectList[projectIndex].taskList.push(new task(title, description, priority, dueDate));
+    localStorage.setItem('myToDoLists', JSON.stringify(projectList));
+    showTasks(projectList[projectIndex]);
+}
+
+// function deleteTask(projectIndex,taskIndex){
+//     projectList[projectIndex].taskList.splice(taskIndex, 1);
+//     showTasks(projectList[projectIndex]);
+// }
 
 // Project constructor function
 function project(name){
     this.name = name;
     this.taskList = [];
-    this.addTask = function(title, description, priority, dueDate){
-        this.taskList.push(new task(title, description, priority, dueDate));
-        showTasks(this);
-    };
-    this.deleteTask = function(title){
-        let taskIndex = this.taskList.findIndex(item => item.title=== title);
-        this.taskList.splice(taskIndex, 1);
-        showTasks(this);
-    };
 }
 
 export {
     task,
     addNewProject,
     removeProject,
+    addNewTask,
     project,
     projectList
 }
