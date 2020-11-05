@@ -40,6 +40,27 @@ function addNewTask(projectIndex, title, description, priority, dueDate){
     showTasks(projectList[projectIndex]);
 }
 
+function toggleFormElements(form) { 
+    var inputs = form.querySelectorAll("input,select,textarea"); 
+    for (var i = 0; i < inputs.length; i++) { 
+        inputs[i].disabled = !inputs[i].disabled;
+        inputs[i].classList.toggle('form-control-plaintext');
+        inputs[i].classList.toggle('form-control');
+    } 
+}
+
+function amendTask(projectIndex, taskIndex, newTitle, newDescription, newPriority, newDueDate){
+    console.log(projectList[projectIndex].taskList[taskIndex]);
+    Object.assign(projectList[projectIndex].taskList[taskIndex], {
+        title: newTitle, 
+        description: newDescription, 
+        priority: newPriority, 
+        dueDate: newDueDate
+    });
+    localStorage.setItem('myToDoLists', JSON.stringify(projectList));
+    showTasks(projectList[projectIndex]);
+}
+
 // function deleteTask(projectIndex,taskIndex){
 //     projectList[projectIndex].taskList.splice(taskIndex, 1);
 //     showTasks(projectList[projectIndex]);
@@ -56,6 +77,8 @@ export {
     addNewProject,
     removeProject,
     addNewTask,
+    toggleFormElements,
+    amendTask,
     project,
     projectList
 }

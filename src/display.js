@@ -20,22 +20,22 @@ let showProjects = function(){
             <form class="newTaskForm">
                 <div class="form-row">
                     <div class="form-group mb-2 col-md-6">
-                        <input type="text" readonly class="form-control-plaintext taskName" placeholder="Task Name">
+                        <input name="title" type="text" class="form-control taskName" placeholder="Task Name">
                     </div>
                     <div class="form-group mb-2 col-md-3">
-                        <select disabled class="form-control-plaintext prioritySelect">
+                        <select name="priority" class="form-control-plaintext prioritySelect">
                             <option>High Priority</option>
                             <option selected>Medium Priority</option>
                             <option>Low Priority</option>
                         </select>
                     </div>
                     <div class="form-group mb-2 col-md-3">
-                        <input type="number" readonly class="form-control-plaintext dueDate" placeholder="Due Date">
+                        <input name="dueDate" type="number" class="form-control dueDate" placeholder="Due Date">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group mb-2 col-md-9">
-                        <textarea class="readonly form-control-plaintext description" id="exampleFormControlTextarea1" rows="1" placeholder="Description"></textarea>
+                        <textarea name="description" class="form-control description" id="exampleFormControlTextarea1" rows="1" placeholder="Description"></textarea>
                     </div>
                     <div class="form-group mb-2 col-md-3">
                         <button type="submit" class="btn btn-primary mb-2 addTask">Add Task</button>
@@ -55,6 +55,7 @@ let showTasks = function(project){
     project.taskList.forEach(task => {
         let listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
+        listItem.setAttribute('data-taskIndex', `${project.taskList.indexOf(task)}`);
         listItem.setAttribute('priority',task.priority);
         listItem.setAttribute('completed',task.completed);
         listItem.innerHTML=`
@@ -62,27 +63,25 @@ let showTasks = function(project){
             <form>
                 <div class="form-row">
                     <div class="form-group mb-2 col-md-6">
-                        <input type="text" readonly class="form-control-plaintext taskName" value="${task.title}">
+                        <input name="title" type="text" disabled class="form-control-plaintext taskName" value="${task.title}">
                     </div>
                     <div class="form-group mb-2 col-md-3">
-                        <input type="text" readonly class="form-control-plaintext taskName" value="${task.priority}">
-                        <select class="form-control-plaintext prioritySelect hidden">
-                            <option>High Priority</option>
-                            <option selected>Medium Priority</option>
-                            <option>Low Priority</option>
+                        <select name="priority" disabled class="form-control-plaintext prioritySelect">
+                            <option ${task.priority==='High Priority'?'selected':''}>High Priority</option>
+                            <option ${task.priority==='Medium Priority'?'selected':''}>Medium Priority</option>
+                            <option ${task.priority==='Low Priority'?'selected':''}>Low Priority</option>
                         </select>
                     </div>
                     <div class="form-group mb-2 col-md-3">
-                        <input type="number" readonly class="form-control-plaintext dueDate" value="${task.dueDate}">
+                        <input name="dueDate" type="number" disabled class="form-control-plaintext dueDate" value="${task.dueDate}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group mb-2 col-md-9">
-                        <textarea class="readonly form-control-plaintext description" id="exampleFormControlTextarea1" rows="1" value="${task.description}"></textarea>
+                        <textarea  name="description" disabled class="form-control-plaintext description" id="exampleFormControlTextarea1" rows="1">${task.description}</textarea>
                     </div>
                     <div class="form-group mb-2 col-md-3">
-                        <button type="submit" class="btn btn-primary mb-2 editTask">Edit Task</button>
-                        <button type="submit" class="btn btn-primary mb-2 addTask hidden">Add Task</button>
+                        <button class="btn btn-primary mb-2 editTask" data-projectIndex="${projectList.indexOf(project)}" data-taskIndex="${project.taskList.indexOf(task)}">Edit Task</button>
                     </div>
                 </div>
             </form>
