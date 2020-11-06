@@ -1,4 +1,5 @@
 import{projectList} from './app'
+import datepicker from '../node_modules/js-datepicker'
 
 let showProjects = function(){
     let projectsWrapper = document.querySelector('.projectsWrapper');
@@ -30,7 +31,7 @@ let showProjects = function(){
                         </select>
                     </div>
                     <div class="form-group mb-2 col-md-3">
-                        <input name="dueDate" type="number" class="form-control dueDate" placeholder="Due Date">
+                        <input name="dueDate" type="text" class="form-control dueDate" placeholder="Due Date">
                     </div>
                 </div>
                 <div class="form-row">
@@ -45,6 +46,7 @@ let showProjects = function(){
         `;
         projectsWrapper.appendChild(projectCard);
         showTasks(project);
+        const picker = datepicker('.dueDate')
     })
 }
 
@@ -75,7 +77,7 @@ let showTasks = function(project){
                         </select>
                     </div>
                     <div class="form-group mb-2 col-md-2">
-                        <input name="dueDate" type="number" disabled class="form-control-plaintext dueDate" value="${task.dueDate}">
+                        <input name="dueDate" type="text" disabled class="form-control-plaintext dueDate" value="${task.dueDate}">
                     </div>
                 </div>
                 <div class="form-row">
