@@ -7,15 +7,6 @@ function task(title, description, priority, dueDate){
     this.priority = priority;
     this.dueDate = dueDate;
     this.completed = false;
-    this.amend = function(title, description, priority, dueDate){
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.dueDate = dueDate;
-    }
-    this.toggleComplete = function(){
-        this.completed = !this.completed;
-    }
 }
 
 let projectList = JSON.parse(localStorage.getItem('myToDoLists')) || [];
@@ -50,7 +41,6 @@ function toggleFormElements(form) {
 }
 
 function amendTask(projectIndex, taskIndex, newTitle, newDescription, newPriority, newDueDate){
-    console.log(projectList[projectIndex].taskList[taskIndex]);
     Object.assign(projectList[projectIndex].taskList[taskIndex], {
         title: newTitle, 
         description: newDescription, 
@@ -67,6 +57,12 @@ function deleteTask(projectIndex,taskIndex){
     showTasks(projectList[projectIndex]);
 }
 
+function toggleComplete(projectIndex,taskIndex){
+    projectList[projectIndex].taskList[taskIndex].completed = !projectList[projectIndex].taskList[taskIndex].completed;
+    localStorage.setItem('myToDoLists', JSON.stringify(projectList));
+    console.log(projectList[projectIndex].taskList[taskIndex])
+}
+
 // Project constructor function
 function project(name){
     this.name = name;
@@ -81,6 +77,7 @@ export {
     toggleFormElements,
     amendTask,
     deleteTask,
+    toggleComplete,
     project,
     projectList
 }

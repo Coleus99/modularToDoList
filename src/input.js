@@ -1,4 +1,4 @@
-import{addNewTask, amendTask, toggleFormElements, deleteTask, projectList, addNewProject, removeProject} from './app';
+import{addNewTask, amendTask, toggleComplete, toggleFormElements, deleteTask, projectList, addNewProject, removeProject} from './app';
 import { showTasks } from './display';
 
 let setEventListeners = function(){
@@ -11,7 +11,6 @@ let setEventListeners = function(){
     });
     document.addEventListener('click', function(event){
         if(event.target.classList.contains('closeProject')){
-            console.log(event.target.getAttribute('data-target'));
             let target = event.target.getAttribute('data-target');
             removeProject(target);
         }
@@ -59,6 +58,14 @@ let setEventListeners = function(){
             }
             toggleFormElements(taskForm)
             event.target.parentNode.toggleAttribute('active')
+        }
+    })
+
+    document.addEventListener('click', function(event){
+        if(event.target.classList.contains('toggleComplete')){
+            let projectIndex = event.target.parentNode.getAttribute('data-projectIndex');
+            let taskIndex = event.target.parentNode.getAttribute('data-taskIndex');
+            toggleComplete(projectIndex,taskIndex);
         }
     })
 

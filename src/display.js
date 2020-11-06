@@ -49,20 +49,20 @@ let showProjects = function(){
 }
 
 let showTasks = function(project){
-    console.log(project);
     let listGroup = document.getElementById(project.name);
     listGroup.innerHTML='';
     project.taskList.forEach(task => {
         let listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
         listItem.setAttribute('data-taskIndex', `${project.taskList.indexOf(task)}`);
+        listItem.setAttribute('data-projectIndex',`${projectList.indexOf(project)}` );
         listItem.setAttribute('priority',task.priority);
         listItem.setAttribute('completed',task.completed);
         listItem.innerHTML=`
-            <form>
-                <div class="form-row">
+        <input name="status" class="form-check-input m-0 toggleComplete" type="checkbox" ${task.completed?'checked':''}>
+        <form>
+            <div class="form-row">
                     <div class="form-group mb-2 col-md-1">
-                        <input class="form-check-input m-0 position-static" type="checkbox" value="" id="defaultCheck1">
                     </div>
                     <div class="form-group mb-2 col-md-6">
                         <input name="title" type="text" disabled class="form-control-plaintext taskName" value="${task.title}">
