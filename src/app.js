@@ -17,10 +17,11 @@ function addNewProject(name){
     showProjects();
 }
 
-function removeProject(name){
-    projectList = projectList.filter(obj => {
-        return obj.name!==name;
-    });
+function removeProject(projectIndex){
+    projectList.splice(projectIndex,1)
+    // projectList = projectList.filter(obj => {
+    //     return obj.name!==name;
+    // });
     localStorage.setItem('myToDoLists', JSON.stringify(projectList));
     showProjects();
 }

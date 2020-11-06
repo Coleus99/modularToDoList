@@ -6,7 +6,7 @@ let showProjects = function(){
     projectList.forEach(project => {
         let projectCard = document.createElement('div');
         projectCard.classList.add('project','card', 'my-2');
-        projectCard.setAttribute('data-index', `${projectList.indexOf(project)}`);
+        projectCard.setAttribute('data-projectIndex', `${projectList.indexOf(project)}`);
         projectCard.innerHTML = `
             <div class="card-header d-flex justify-content-between">
                 <span>${project.name}</span>
@@ -59,7 +59,7 @@ let showTasks = function(project){
         listItem.setAttribute('priority',task.priority);
         listItem.setAttribute('completed',task.completed);
         listItem.innerHTML=`
-        <input name="status" class="form-check-input m-0 toggleComplete" type="checkbox" ${task.completed?'checked':''}>
+        <input name="status" class="form-check-input m-0 taskEditor toggleComplete" type="checkbox" ${task.completed?'checked':''}>
         <form>
             <div class="form-row">
                     <div class="form-group mb-2 col-md-1">
@@ -83,8 +83,8 @@ let showTasks = function(project){
                         <textarea  name="description" disabled class="form-control-plaintext description" id="exampleFormControlTextarea1" rows="1">${task.description}</textarea>
                     </div>
                     <div class="form-group button-group mb-2 col-md-3" data-projectIndex="${projectList.indexOf(project)}" data-taskIndex="${project.taskList.indexOf(task)}">
-                        <button class="btn btn-primary mb-2 editTask">Edit Task</button>
-                        <button class="btn btn-danger mb-2 deleteTask">Delete Task</button>
+                        <button class="btn btn-primary mb-2 taskEditor editTask">Edit Task</button>
+                        <button class="btn btn-danger mb-2 taskEditor deleteTask">Delete Task</button>
                     </div>
                 </div>
             </form>
