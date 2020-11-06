@@ -19,9 +19,6 @@ function addNewProject(name){
 
 function removeProject(projectIndex){
     projectList.splice(projectIndex,1)
-    // projectList = projectList.filter(obj => {
-    //     return obj.name!==name;
-    // });
     localStorage.setItem('myToDoLists', JSON.stringify(projectList));
     showProjects();
 }
@@ -61,7 +58,7 @@ function deleteTask(projectIndex,taskIndex){
 function toggleComplete(projectIndex,taskIndex){
     projectList[projectIndex].taskList[taskIndex].completed = !projectList[projectIndex].taskList[taskIndex].completed;
     localStorage.setItem('myToDoLists', JSON.stringify(projectList));
-    console.log(projectList[projectIndex].taskList[taskIndex])
+    showTasks(projectList[projectIndex]);
 }
 
 // Project constructor function

@@ -25,13 +25,13 @@ let showProjects = function(){
                     </div>
                     <div class="form-group mb-2 col-md-3">
                         <select name="priority" class="form-control-plaintext prioritySelect">
-                            <option>High Priority</option>
-                            <option selected>Medium Priority</option>
-                            <option>Low Priority</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium" selected>Medium Priority</option>
+                            <option value="low">Low Priority</option>
                         </select>
                     </div>
                     <div class="form-group mb-2 col-md-3">
-                        <input name="dueDate" type="text" class="form-control dueDate" placeholder="Due Date">
+                        <input name="dueDate" type="text" class="form-control dueDate" placeholder="Due Date" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-row">
@@ -46,7 +46,6 @@ let showProjects = function(){
         `;
         projectsWrapper.appendChild(projectCard);
         showTasks(project);
-        const picker = datepicker('.dueDate')
     })
 }
 
@@ -61,37 +60,44 @@ let showTasks = function(project){
         listItem.setAttribute('priority',task.priority);
         listItem.setAttribute('completed',task.completed);
         listItem.innerHTML=`
-        <input name="status" class="form-check-input m-0 taskEditor toggleComplete" type="checkbox" ${task.completed?'checked':''}>
+        <div class="form-group">
+            <input name="status" class="form-check-input ml-0 taskEditor toggleComplete" type="checkbox" ${task.completed?'checked':''}>
+        </div>
         <form>
             <div class="form-row">
-                    <div class="form-group mb-2 col-md-1">
-                    </div>
-                    <div class="form-group mb-2 col-md-6">
-                        <input name="title" type="text" disabled class="form-control-plaintext taskName" value="${task.title}">
-                    </div>
-                    <div class="form-group mb-2 col-md-3">
-                        <select name="priority" disabled class="form-control-plaintext prioritySelect">
-                            <option ${task.priority==='High Priority'?'selected':''}>High Priority</option>
-                            <option ${task.priority==='Medium Priority'?'selected':''}>Medium Priority</option>
-                            <option ${task.priority==='Low Priority'?'selected':''}>Low Priority</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-2 col-md-2">
-                        <input name="dueDate" type="text" disabled class="form-control-plaintext dueDate" value="${task.dueDate}">
-                    </div>
+                <div class="form-group mb-2 col-md-6">
+                    <input name="title" type="text" disabled class="form-control-plaintext taskName" value="${task.title}">
                 </div>
-                <div class="form-row">
-                    <div class="form-group mb-2 col-md-9">
-                        <textarea  name="description" disabled class="form-control-plaintext description" id="exampleFormControlTextarea1" rows="1">${task.description}</textarea>
-                    </div>
-                    <div class="form-group button-group mb-2 col-md-3" data-projectIndex="${projectList.indexOf(project)}" data-taskIndex="${project.taskList.indexOf(task)}">
-                        <button class="btn btn-primary mb-2 taskEditor editTask">Edit Task</button>
-                        <button class="btn btn-danger mb-2 taskEditor deleteTask">Delete Task</button>
-                    </div>
+                <div class="form-group mb-2 col-md-3 showOnEdit">
+                    <select name="priority" disabled class="form-control-plaintext prioritySelect">
+                        <option value="high" ${task.priority==='high'?'selected':''}>High Priority</option>
+                        <option value="medium" ${task.priority==='medium'?'selected':''}>Medium Priority</option>
+                        <option value="low" ${task.priority==='low'?'selected':''}>Low Priority</option>
+                    </select>
                 </div>
-            </form>
+                <div class="form-group mb-2 col-md-3 dueDateGroup">
+                    <div class="toolTip"><span style="font-size: 22px">📅<span>
+                        <span style="font-size: 12px" class="tooltiptext">Due: ${task.dueDate}</span>
+                    </div>
+                    <input name="dueDate" type="text" disabled class="form-control-plaintext dueDate" placeholder="Due Date" value="${task.dueDate}" autocomplete="off">
+                </div>
+                <div class="form-group mb-2 col-md-9">
+                    <textarea  name="description" disabled class="form-control-plaintext description" id="exampleFormControlTextarea1" rows="1">${task.description}</textarea>
+                </div>
+                <div class="form-group button-group mb-2 col-md-3">
+                    <button class="btn btn-primary mb-2 taskEditor editTask">Edit</button>
+                    <button class="btn btn-danger mb-2 taskEditor deleteTask">Delete</button>
+                </div>
+            </div>
+        </form>
         `;
         listGroup.appendChild(listItem);
+    })
+    document.querySelectorAll('.dueDate').forEach(field =>{
+        if(!field.hasAttribute('datepicker')){
+            datepicker(field);
+            field.setAttribute('datepicker','active')
+        }
     })
 }
 

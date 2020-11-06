@@ -28,7 +28,7 @@ let setEventListeners = function(){
     });
 
     document.addEventListener('click', function(event){
-        if(event.target.classList.contains('taskEditor')){
+        if(event.target.classList.contains('taskEditor')||event.target.classList.contains('form-control-plaintext')){
             let taskForm = event.target.closest('form');
             let projectIndex = event.target.closest('.list-group-item').getAttribute('data-projectIndex');
             let taskIndex = event.target.closest('.list-group-item').getAttribute('data-taskIndex');
@@ -41,7 +41,7 @@ let setEventListeners = function(){
                     event.target.parentNode.querySelector('.deleteTask').textContent='Delete Task';
                 }
                 else{
-                    event.target.textContent='Save changes';
+                    event.target.textContent='Save';
                     event.target.parentNode.querySelector('.deleteTask').textContent='Cancel';
                 }
                 toggleFormElements(taskForm)
@@ -60,7 +60,8 @@ let setEventListeners = function(){
                 taskForm.toggleAttribute('active')
             }
 
-            if(event.target.classList.contains('toggleComplete')){
+            if(event.target.classList.contains('toggleComplete')||event.target.classList.contains('form-control-plaintext')){
+                console.log('clicked')
                 toggleComplete(projectIndex,taskIndex);
             }
         }
