@@ -12,3 +12,7 @@ Ability to add new 'projects' - separate lists of todos.
 Use constructor functions for the todos
 Split functions into modules for improved OOP
 DOM manipulaton practice 
+
+## Potential Improvements
+Import Bootstrap via NPM rather than via CDN
+Make it sortable / enable reordering
