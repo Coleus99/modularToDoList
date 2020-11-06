@@ -1,5 +1,6 @@
 import{projectList} from './app'
-import datepicker from '../node_modules/js-datepicker'
+// import datepicker from '../node_modules/js-datepicker'
+import datepicker from 'js-datepicker'
 
 let showProjects = function(){
     let projectsWrapper = document.querySelector('.projectsWrapper');
