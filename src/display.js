@@ -17,31 +17,33 @@ let showProjects = function(){
             <ul class="list-group list-group-flush" id="${project.name}">
                 <p>No tasks yet! Add one below</p>
             </ul>
-            <form class="newTaskForm">
-                <div class="form-row">
-                    <div class="form-group mb-2 col-md-6">
-                        <input name="title" type="text" class="form-control taskName" placeholder="Task Name">
+            <div class="card-footer">
+                <form class="newTaskForm">
+                    <div class="form-row">
+                        <div class="form-group mb-2 col-md-6">
+                            <input name="title" type="text" class="form-control taskName" placeholder="Task Name">
+                        </div>
+                        <div class="form-group mb-2 col-md-3">
+                            <select name="priority" class="form-control-plaintext prioritySelect">
+                                <option value="high">High Priority</option>
+                                <option value="medium" selected>Medium Priority</option>
+                                <option value="low">Low Priority</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2 col-md-3">
+                            <input name="dueDate" type="text" class="form-control dueDate" placeholder="Due Date" autocomplete="off">
+                        </div>
                     </div>
-                    <div class="form-group mb-2 col-md-3">
-                        <select name="priority" class="form-control-plaintext prioritySelect">
-                            <option value="high">High Priority</option>
-                            <option value="medium" selected>Medium Priority</option>
-                            <option value="low">Low Priority</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group mb-2 col-md-9">
+                            <textarea name="description" class="form-control description" id="exampleFormControlTextarea1" rows="1" placeholder="Description"></textarea>
+                        </div>
+                        <div class="form-group mb-2 col-md-3">
+                            <button type="submit" class="btn btn-primary mb-2 addTask">Add Task</button>
+                        </div>
                     </div>
-                    <div class="form-group mb-2 col-md-3">
-                        <input name="dueDate" type="text" class="form-control dueDate" placeholder="Due Date" autocomplete="off">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group mb-2 col-md-9">
-                        <textarea name="description" class="form-control description" id="exampleFormControlTextarea1" rows="1" placeholder="Description"></textarea>
-                    </div>
-                    <div class="form-group mb-2 col-md-3">
-                        <button type="submit" class="btn btn-primary mb-2 addTask">Add Task</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         `;
         projectsWrapper.appendChild(projectCard);
         showTasks(project);
