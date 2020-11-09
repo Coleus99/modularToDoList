@@ -83,7 +83,7 @@ let showTasks = function(project){
                     <input name="dueDate" type="text" disabled class="form-control-plaintext dueDate" placeholder="Due Date" value="${task.dueDate}" autocomplete="off">
                 </div>
                 <div class="form-group mb-2 col-md-9">
-                    <textarea  name="description" disabled class="form-control-plaintext description" id="exampleFormControlTextarea1" rows="1">${task.description}</textarea>
+                    <textarea  name="description" disabled class="form-control-plaintext description" rows="1">${task.description}</textarea>
                 </div>
                 <div class="form-group button-group mb-2 col-md-3">
                     <button class="btn btn-primary mb-2 taskEditor editTask">Edit</button>

@@ -21,7 +21,7 @@ let setEventListeners = function(){
     document.addEventListener('submit', function(event){
         if(event.target.classList.contains('newTaskForm')){
             event.preventDefault();
-            let projectIndex = event.target.parentNode.getAttribute('data-projectIndex');
+            let projectIndex = event.target.closest('.project').getAttribute('data-projectIndex');
             addNewTask(projectIndex, event.target.elements.title.value, event.target.elements.description.value, event.target.elements.priority.value, event.target.elements.dueDate.value)
             event.target.reset();
         }
